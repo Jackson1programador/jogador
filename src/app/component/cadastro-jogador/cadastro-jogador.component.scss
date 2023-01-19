@@ -1,0 +1,25 @@
+.container {
+  background-color: #eeeeee;
+  margin: auto;
+
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.botao {
+  margin-right: 1em;
+  margin-left: 2em;
+}
+
+.input {
+  padding-left: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.titulo {
+  text-align: center;
+}
