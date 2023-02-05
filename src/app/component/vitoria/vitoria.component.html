@@ -1,0 +1,47 @@
+
+
+<div class="containerVencedor">
+
+  <div class="box">
+
+    <mat-toolbar color="primary">
+      <span> <label id="example-radio-group-label">Vencedor</label></span>
+      <span class="example-spacer"></span>
+
+    </mat-toolbar>
+
+
+      <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="favoriteSeason">
+        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
+          {{season}}
+        </mat-radio-button>
+      </mat-radio-group>
+
+
+
+      <mat-card>
+        <mat-card-content>
+
+          <div class="rodapeVitoria">
+
+            <div class="ganhador">
+            <h3>O ganhador é o {{favoriteSeason}} ?</h3>
+            </div>
+
+            <div class="botãoVencedor">
+            <button mat-raised-button color="primary" >Ganhador</button>
+            </div>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+
+  </div>
+
+ </div>
+

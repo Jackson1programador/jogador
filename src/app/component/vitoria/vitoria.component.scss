@@ -1,0 +1,44 @@
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.containerVencedor {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+.box {
+  width: 30%;
+  background-color:  #eeeeee;
+  margin-top: 20px;
+
+}
+
+.ganhador{
+  padding-left: 1em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+
+}
+
+.botãoVencedor{
+  justify-content: end;
+  margin-left: 1em;
+
+}
+
+.rodapeVitoria{
+  display: flex;
+
+}

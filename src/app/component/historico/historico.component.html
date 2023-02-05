@@ -1,0 +1,24 @@
+
+<div class="containerHistorico">
+
+  <div class="boxHistorico">
+    <mat-toolbar color="primary">
+      <span> <label id="example-radio-group-label">Histório das partidas</label></span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+
+    <ul>
+      <li *ngFor = "let item of partidas">
+        <mat-card class="históricoCard, containerCard">
+          <mat-card-content>Ganhdador da partida {{item.partida}} é:  {{item.jogador}}
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>delete</mat-icon></button>
+          <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>edit</mat-icon></button>
+          </mat-card-content>
+        </mat-card>
+
+
+      </li>
+    </ul>
+  </div>
+
+</div>

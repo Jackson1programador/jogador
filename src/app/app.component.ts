@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Jogador } from 'src/app/Jogador';
+import { Component, Input, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,6 +7,16 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Controler Play';
+
+  constructor() {}
+
+
+
+  ngOnInit(): void {}
+
+
 }
+
+

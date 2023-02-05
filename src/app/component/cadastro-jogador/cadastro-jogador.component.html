@@ -1,13 +1,10 @@
 
 <div class="container">
   <h1 class="titulo">Cadastro do jogador</h1>
-  <mat-form-field appearance="fill">
-    <mat-label>Fill form field</mat-label>
-    <input matInput placeholder="Nome" class="input">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
-  <button mat-raised-button color="primary" class="botao">Cadastrar</button>
+    <input [(ngModel)]='jogador'  matInput placeholder="Nome" class="input">
+  <button (click)="addJogador()" mat-raised-button color="primary" class="botao">Cadastrar</button>
 </div>
+
+
 
 
