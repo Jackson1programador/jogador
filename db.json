@@ -1,10 +1,18 @@
 {
   "jogadores": [
-  {"id": 1, "nome": "Jackson", "situacao": true, "saldo": 0, "imagem": "teste"},
-  {"id": 2, "nome": "Nonato", "situacao": true, "saldo": 0, "imagem": "teste"},
-  {"id": 3, "nome": "Fagner", "situacao": true, "saldo": 0, "imagem": "teste"},
-  {"id": 4, "nome": "Wagner", "situacao": true, "saldo": 0, "imagem": "teste"},
-  {"id": 5, "nome": "Brenna", "situacao": true, "saldo": 0, "imagem": "teste"}
-
+    {
+      "nome": "Jackson",
+      "situacao": false,
+      "saldo": 0,
+      "imagem": "teste",
+      "id": 9
+    },
+    {
+      "nome": "brenna",
+      "situacao": false,
+      "saldo": 0,
+      "imagem": "teste",
+      "id": 11
+    }
   ]
 }

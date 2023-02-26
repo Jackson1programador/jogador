@@ -9,7 +9,8 @@
 
 .divCard {
   display: inline;
-  margin-left: 6%;
+  width: 200px;
+
 }
 
 .containerBotões {
@@ -29,4 +30,11 @@
 
 table {
   width: 100%;
+}
+
+.divContainerCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
