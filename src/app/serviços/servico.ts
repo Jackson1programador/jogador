@@ -4,6 +4,7 @@ import { EventEmitter, Injectable } from "@angular/core";
 import { Jogador } from "../Jogador";
 import {HttpClient} from '@angular/common/http'
 import { filter, Observable } from "rxjs";
+import { Partidas } from "../partidas";
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { filter, Observable } from "rxjs";
 export class servico {
 
   private apiUrl = 'http://localhost:3000/jogadores'
+  private apiUrlPartidas = 'http://localhost:3000/partidas'
 
   public emitEvent = new EventEmitter();
 
@@ -49,6 +51,25 @@ editaSituacaoJogador(id: number, situacao: boolean, saldo:number, nome: string):
     res => res,
   )
 }
+
+
+
+pushPartida(nome: string, partida: number): Observable<Partidas> {
+
+  return this.http.post<Partidas>(this.apiUrlPartidas, {vencedor: nome, partida: partida }).pipe(
+    res => res,
+    error => error
+  )
+}
+
+
+getAllHistorico(): Observable<Partidas[]> {
+  return this.http.get<Partidas[]>(this.apiUrlPartidas).pipe(
+    res => res,
+    error => error
+  )
+}
+
 
 
 

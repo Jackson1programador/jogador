@@ -2,17 +2,41 @@
   "jogadores": [
     {
       "nome": "Jackson",
-      "situacao": false,
+      "situacao": true,
       "saldo": 0,
       "imagem": "teste",
       "id": 9
     },
     {
       "nome": "brenna",
-      "situacao": false,
+      "situacao": true,
       "saldo": 0,
       "imagem": "teste",
       "id": 11
+    },
+    {
+      "nome": "Fagner",
+      "situacao": true,
+      "saldo": 0,
+      "imagem": "teste",
+      "id": 12
+    }
+  ],
+  "partidas": [
+    {
+      "vencedor": "Jackson",
+      "partida": 1,
+      "id": 1
+    },
+    {
+      "vencedor": "brenna",
+      "partida": 2,
+      "id": 2
+    },
+    {
+      "vencedor": "Fagner",
+      "partida": 1,
+      "id": 3
     }
   ]
 }

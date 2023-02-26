@@ -19,7 +19,10 @@ export class CadastroJogadorComponent implements OnInit {
 
   addJogador(nome: string) {
     return this.servico.pushJogador(nome).subscribe(
-      res => this.servico.addJogadorAlert(res)
+      res => {
+        this.servico.addJogadorAlert(res);
+        this.jogador = '';
+      }
     )
   }
 

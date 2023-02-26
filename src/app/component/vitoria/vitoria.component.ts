@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { servico } from './../../serviços/servico';
+import { Jogador } from 'src/app/Jogador';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-vitoria',
@@ -7,5 +9,21 @@ import { Component } from '@angular/core';
 })
 export class VitoriaComponent {
   favoriteSeason!: string;
-  seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+    @Input() public jogadores: Jogador[] = [];
+
+  controlePartidas: number = 1;
+
+  constructor (private servico: servico) {}
+
+  escolherVencedor() {
+    this.servico.pushPartida(this.favoriteSeason, this.controlePartidas).subscribe(
+      res => {
+        console.log(res);
+        this.controlePartidas += 1
+      }
+    )
+  }
+
+
+
 }

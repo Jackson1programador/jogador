@@ -59,6 +59,7 @@ import { RodapeComponent } from './component/rodape/rodape.component';
     BrowserModule,
     MatToolbarModule,
     BrowserAnimationsModule,
+    PainelComponent,
 
   ],
   providers: [],

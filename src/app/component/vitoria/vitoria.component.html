@@ -15,8 +15,8 @@
         aria-labelledby="example-radio-group-label"
         class="example-radio-group"
         [(ngModel)]="favoriteSeason">
-        <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-          {{season}}
+        <mat-radio-button class="example-radio-button" *ngFor="let season of jogadores" [value]="season.nome">
+          {{season.nome}}
         </mat-radio-button>
       </mat-radio-group>
 
@@ -32,7 +32,7 @@
             </div>
 
             <div class="botãoVencedor">
-            <button mat-raised-button color="primary" >Ganhador</button>
+            <button mat-raised-button color="primary" (click)="escolherVencedor()" >Ganhador</button>
             </div>
 
           </div>
