@@ -127,16 +127,16 @@
 
 
       <div></div>
-      <mat-card-content *ngFor="let item of jogadores; let index = index" class="divContainerCard">
+      <mat-card-content *ngFor="let item of jogadores; let index = index" class="divContainerCard" [ngClass]="{'inativo': eInativo(item.situacao)}" >
         <div class="divCard"> {{item.nome}} </div>
         <div class="divCard"> {{item.situacao}} </div>
-        <div class="divCard"> {{item.saldo}} </div>
+        <div class="divCard" [ngClass]="{'saldoPositivo': eSaldoPositivo(item.saldo), 'saldoNegativo': eSaldoNegativo(item.saldo)}"> R$ {{item.saldo.toFixed(2)}} </div>
 
         <div class="divCard"> <button (click)="deletarJogador(item.id)" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>delete</mat-icon> </button> </div>
 
         <div class="divCard"> <button (click)="alteraSituacaoJogador(item.id, item.situacao, index, item.nome, item.saldo)" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>toggle_on</mat-icon></button> </div>
 
-        <div class="divCard"> <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>credit_card</mat-icon></button> </div>
+        <div class="divCard"> <button (click)="alteraSaldo(item.nome)" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>credit_card</mat-icon></button> </div>
       </mat-card-content>
 
 

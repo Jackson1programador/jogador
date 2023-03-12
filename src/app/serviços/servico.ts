@@ -58,6 +58,7 @@ editaSituacaoJogador(id: number, situacao: boolean, saldo:number, nome: string):
 
 
 
+
 pushPartida(nome: string, partida: number): Observable<Partidas> {
 
   return this.http.post<Partidas>(this.apiUrlPartidas, {vencedor: nome, partida: partida }).pipe(

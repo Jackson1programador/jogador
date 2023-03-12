@@ -12,7 +12,6 @@ export class PainelComponent  implements OnInit {
 
 valorDaPartida: number = 2.50
 jogadores:Jogador[] = [];
-//displayedColumns = ['nome', 'situacao', 'partidas', 'saldo', 'lixeira', 'edite', 'ativo', 'pagamento'];
 
 
 constructor(private servico: servico) {
@@ -21,8 +20,10 @@ constructor(private servico: servico) {
 
 ngOnInit(): void {
 
+
   this.servico.getAll().subscribe(
     res => this.jogadores = res
+
   );
 
 
@@ -32,6 +33,8 @@ ngOnInit(): void {
       return this.jogadores.push(res);
     }
   );
+
+
 
 }
 
@@ -66,26 +69,60 @@ atualizaSaldo(id: number, situacao: boolean, saldo:number, nome: string){
 }
 
 alteraSaldo(nome: string)  {
+  let valor = this.valorDaPartida;
+  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
+  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
 
-var valor = this.valorDaPartida;
- var lista = this.jogadores;
-
-  var listaFinal = this.jogadores.map(function (element, index, array) {
-
-    for(var i = 0; i < lista.length; i++ ){
-      if(element.nome == nome) {
-        element.saldo + valor
-      } else {
-        element.saldo - valor
-      }
+  let novaListaAtiva = listaAtiva.map((element) => {
+    if(element.nome == nome) {
+      element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
+      return element
+    } else {
+      element.saldo = element.saldo - valor
+      return element
     }
   })
 
+  listaAtiva.forEach(element => {
+    this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
+    return
+   })});
 
-
-
- // return this.jogadores = listaFinal;
+  let listaFinal = novaListaAtiva.concat(listaInativa)
+  return this.jogadores = listaFinal
 }
+
+
+criaListaDeJogadoresSoAtivo () {
+  let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao === true);
+  console.log(lista)
+  return lista
+}
+
+criaListaDeJogadoresSoInativo () {
+  let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao !== true);
+  console.log(lista)
+  return lista
+}
+
+eInativo(situacao: boolean) {
+  return !situacao
+}
+
+eSaldoPositivo(saldo: number) {
+  if(saldo > 0 ) {
+    return true
+  }
+   return false
+}
+
+eSaldoNegativo(saldo: number) {
+  if(saldo < 0 ) {
+    return true
+  }
+  return false
+}
+
 
 
 
