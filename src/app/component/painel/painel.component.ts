@@ -57,5 +57,36 @@ alteraSituacaoJogador(id: number, situacao: boolean, index: number, nome: string
   )
 }
 
+atualizaSaldo(id: number, situacao: boolean, saldo:number, nome: string){
+  this.servico.editaSituacaoJogador(id, situacao, saldo, nome).subscribe(
+    res => {
+      return
+    }
+  )
+}
+
+alteraSaldo(nome: string)  {
+
+var valor = this.valorDaPartida;
+ var lista = this.jogadores;
+
+  var listaFinal = this.jogadores.map(function (element, index, array) {
+
+    for(var i = 0; i < lista.length; i++ ){
+      if(element.nome == nome) {
+        element.saldo + valor
+      } else {
+        element.saldo - valor
+      }
+    }
+  })
+
+
+
+
+ // return this.jogadores = listaFinal;
+}
+
+
 
 }

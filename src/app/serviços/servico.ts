@@ -16,6 +16,8 @@ export class servico {
   private apiUrlPartidas = 'http://localhost:3000/partidas'
 
   public emitEvent = new EventEmitter();
+  public vencedorEmitEvent = new EventEmitter();
+  public apagandoVencedorEmitEvent = new EventEmitter();
 
 
   constructor(private http: HttpClient) {}
@@ -54,6 +56,8 @@ editaSituacaoJogador(id: number, situacao: boolean, saldo:number, nome: string):
 
 
 
+
+
 pushPartida(nome: string, partida: number): Observable<Partidas> {
 
   return this.http.post<Partidas>(this.apiUrlPartidas, {vencedor: nome, partida: partida }).pipe(
@@ -69,6 +73,18 @@ getAllHistorico(): Observable<Partidas[]> {
     error => error
   )
 }
+
+addVencedorAlert(value: Partidas) {
+  return this.vencedorEmitEvent.emit(value);
+}
+
+excluiVencedorBackEnd(index: number): Observable<any>{
+
+  return this.http.delete(`${this.apiUrlPartidas}/${index}`).pipe(
+    res => res,
+  )
+}
+
 
 
 

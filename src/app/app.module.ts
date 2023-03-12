@@ -60,6 +60,8 @@ import { RodapeComponent } from './component/rodape/rodape.component';
     MatToolbarModule,
     BrowserAnimationsModule,
     PainelComponent,
+    VitoriaComponent,
+    HistoricoComponent
 
   ],
   providers: [],
