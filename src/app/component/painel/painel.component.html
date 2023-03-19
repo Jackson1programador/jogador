@@ -107,7 +107,7 @@
         <span>Mesa de Jogadores</span>
         <span class="example-spacer"></span>
 
-        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <mat-icon>add</mat-icon>
         </button>
 
@@ -121,7 +121,7 @@
 
         <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
           <mat-icon>restart_alt</mat-icon>
-        </button>
+        </button> -->
 
       </mat-toolbar>
 
@@ -136,7 +136,7 @@
 
         <div class="divCard"> <button (click)="alteraSituacaoJogador(item.id, item.situacao, index, item.nome, item.saldo)" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>toggle_on</mat-icon></button> </div>
 
-        <div class="divCard"> <button (click)="alteraSaldo(item.nome)" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>credit_card</mat-icon></button> </div>
+        <div class="divCard"> <button  mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary"><mat-icon>credit_card</mat-icon></button> </div>
       </mat-card-content>
 
 
@@ -145,4 +145,4 @@
 </mat-card-content>
 </mat-card>
 
-<app-vitoria [jogadores]="jogadores"></app-vitoria>
+<app-vitoria (repassandoAExclusao)="corrigeSaldo($event)" (avisaVencedor)="alteraSaldo($event)" [jogadores]="jogadores"></app-vitoria>

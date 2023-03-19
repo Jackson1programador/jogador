@@ -11,6 +11,7 @@ export class HistoricoComponent implements OnInit {
 
   partidas: Partidas[] = [];
   @Output() public avisarQueHouveUmaExclusao = new EventEmitter();
+  @Output() public avisarQueHouveAMesmaExclusao = new EventEmitter();
 
 
   constructor (private servico: servico) {}
@@ -32,9 +33,13 @@ ngOnInit(): void {
 }
 
 public excluiVencedor(index: number) {
+
+
+
   this.servico.excluiVencedorBackEnd(index).subscribe(
     res => {
     this.avisarQueHouveUmaExclusao.emit();
+    this.avisarQueHouveAMesmaExclusao.emit(this.partidas[index-1].vencedor);
     this.partidas = this.partidas.filter(
       item=> { return index !== item.id}
 

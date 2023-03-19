@@ -18,6 +18,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { VitoriaComponent } from './component/vitoria/vitoria.component';
 import { HistoricoComponent } from './component/historico/historico.component';
 import { RodapeComponent } from './component/rodape/rodape.component';
+import { PagamentoComponent } from './component/pagamento/pagamento.component';
 
 
 
@@ -32,6 +33,7 @@ import { RodapeComponent } from './component/rodape/rodape.component';
     VitoriaComponent,
     HistoricoComponent,
     RodapeComponent,
+    PagamentoComponent,
 
 
 

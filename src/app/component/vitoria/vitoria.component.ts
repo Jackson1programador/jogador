@@ -1,6 +1,6 @@
 import { servico } from './../../serviços/servico';
 import { Jogador } from 'src/app/Jogador';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-vitoria',
@@ -10,7 +10,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class VitoriaComponent implements OnInit {
   favoriteSeason!: string;
     @Input() public jogadores: Jogador[] = [];
-
+    @Output() public avisaVencedor = new EventEmitter();
+    @Output() public repassandoAExclusao = new EventEmitter();
 
     public controlePartidas: number = 1;
 
@@ -23,6 +24,8 @@ export class VitoriaComponent implements OnInit {
         this.controlePartidas += 1;
         this.servico.addVencedorAlert(res)
         this.favoriteSeason = ""
+        this.avisaVencedor.emit(res.vencedor)
+
 
       }
     )
@@ -45,6 +48,11 @@ export class VitoriaComponent implements OnInit {
 
 
 
+  }
+
+  repassandoEmit(nome: string) {
+
+    this.repassandoAExclusao.emit(nome);
   }
 
 

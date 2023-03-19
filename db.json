@@ -1,47 +1,33 @@
 {
   "jogadores": [
     {
-      "nome": "JackGol",
+      "nome": "Jackson",
       "situacao": true,
-      "saldo": -47.5,
+      "saldo": 0,
       "imagem": "teste",
-      "id": 13
+      "id": 1
+    },
+    {
+      "nome": "Fagner",
+      "situacao": true,
+      "saldo": 0,
+      "imagem": "teste",
+      "id": 2
     },
     {
       "nome": "Wagner",
       "situacao": true,
-      "saldo": -10,
+      "saldo": 0,
       "imagem": "teste",
-      "id": 14
-    },
-    {
-      "nome": "Jackson",
-      "situacao": true,
-      "saldo": 10,
-      "imagem": "teste",
-      "id": 15
-    }
-  ],
-  "partidas": [
-    {
-      "vencedor": "Jackson",
-      "partida": 1,
-      "id": 1
-    },
-    {
-      "vencedor": "brenna",
-      "partida": 2,
-      "id": 2
-    },
-    {
-      "vencedor": "Jackson",
-      "partida": 3,
       "id": 3
     },
     {
-      "vencedor": "brenna",
-      "partida": 4,
+      "nome": "Nonato",
+      "situacao": true,
+      "saldo": 0,
+      "imagem": "teste",
       "id": 4
     }
-  ]
+  ],
+  "partidas": []
 }

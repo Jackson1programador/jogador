@@ -1,0 +1,73 @@
+body{
+  background-color: #eeeeee;
+  width: 50%;
+  height: 320px;
+  margin: auto;
+  margin-bottom: 20px;
+
+
+}
+h1{
+  margin: 5px 100px;
+}
+
+p{
+  margin: 0px 100px;
+}
+
+.iconPagador{
+  color: red;
+  font-size: 70px ;
+  width: 100px;
+  height: 70px;
+  margin-left: 120px;
+
+}
+
+.iconRecebedor{
+  color: blue;
+  font-size: 70px ;
+  width: 100px;
+  height: 70px;
+  margin-left: 120px;
+
+}
+
+
+
+.container-pagamento{
+  background-color: #eeeeee;
+  width: 100%;
+  display: flex;
+  height: 200px;
+  justify-content: space-between;
+
+
+}
+
+.pagador{
+  background-color: rgb(255, 0, 0, 0.5);
+  width: 45%;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+
+
+
+}
+
+.recebedor{
+  background-color: rgb(100, 100, 255, 0.5);
+  width: 45%;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+
+}
+
+.botao{
+  margin-left: 513px;
+
+}
+
+

@@ -1,6 +1,6 @@
 import { filter } from 'rxjs';
 import { servico } from './../../serviços/servico';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Jogador } from 'src/app/Jogador';
 
 @Component({
@@ -33,6 +33,8 @@ ngOnInit(): void {
       return this.jogadores.push(res);
     }
   );
+
+
 
 
 
@@ -95,13 +97,11 @@ alteraSaldo(nome: string)  {
 
 criaListaDeJogadoresSoAtivo () {
   let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao === true);
-  console.log(lista)
-  return lista
+   return lista
 }
 
 criaListaDeJogadoresSoInativo () {
   let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao !== true);
-  console.log(lista)
   return lista
 }
 
@@ -121,6 +121,31 @@ eSaldoNegativo(saldo: number) {
     return true
   }
   return false
+}
+
+
+corrigeSaldo(nome: string) {
+  let valor = this.valorDaPartida;
+  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
+  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
+
+  let novaListaAtiva = listaAtiva.map((element) => {
+    if(element.nome == nome) {
+      element.saldo = element.saldo - (valor * (listaAtiva.length - 1))
+      return element
+    } else {
+      element.saldo = element.saldo + valor
+      return element
+    }
+  })
+
+  listaAtiva.forEach(element => {
+    this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
+    return
+   })});
+
+  let listaFinal = novaListaAtiva.concat(listaInativa)
+  return this.jogadores = listaFinal
 }
 
 
