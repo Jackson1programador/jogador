@@ -3,14 +3,14 @@
     {
       "nome": "Jackson",
       "situacao": true,
-      "saldo": 0,
+      "saldo": 1012.5,
       "imagem": "teste",
       "id": 1
     },
     {
       "nome": "Fagner",
       "situacao": true,
-      "saldo": 0,
+      "saldo": -800,
       "imagem": "teste",
       "id": 2
     },
@@ -24,10 +24,31 @@
     {
       "nome": "Nonato",
       "situacao": true,
-      "saldo": 0,
+      "saldo": 530,
       "imagem": "teste",
       "id": 4
     }
   ],
-  "partidas": []
+  "partidas": [
+    {
+      "vencedor": "Jackson",
+      "partida": 1,
+      "id": 1
+    },
+    {
+      "vencedor": "Jackson",
+      "partida": 2,
+      "id": 2
+    },
+    {
+      "vencedor": "Fagner",
+      "partida": 3,
+      "id": 3
+    },
+    {
+      "vencedor": "Jackson",
+      "partida": 4,
+      "id": 4
+    }
+  ]
 }

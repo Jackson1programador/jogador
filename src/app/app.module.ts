@@ -8,7 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { CadastroJogadorComponent } from './component/cadastro-jogador/cadastro-jogador.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PainelComponent } from './component/painel/painel.component';
 import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
@@ -52,7 +52,9 @@ import { PagamentoComponent } from './component/pagamento/pagamento.component';
     HttpClientModule,
     MatTableModule,
     MatRadioModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+
 
 
 

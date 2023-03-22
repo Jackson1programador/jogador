@@ -8,10 +8,11 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./vitoria.component.scss']
 })
 export class VitoriaComponent implements OnInit {
-  favoriteSeason!: string;
+  favoriteSeason: string = "";
     @Input() public jogadores: Jogador[] = [];
     @Output() public avisaVencedor = new EventEmitter();
     @Output() public repassandoAExclusao = new EventEmitter();
+
 
     public controlePartidas: number = 1;
 
@@ -19,16 +20,25 @@ export class VitoriaComponent implements OnInit {
 
 
   escolherVencedor() {
-    this.servico.pushPartida(this.favoriteSeason, this.controlePartidas).subscribe(
-      res => {
-        this.controlePartidas += 1;
-        this.servico.addVencedorAlert(res)
-        this.favoriteSeason = ""
-        this.avisaVencedor.emit(res.vencedor)
+    let found = this.jogadores.find( element => element.nome == this.favoriteSeason )
 
 
-      }
-    )
+    if(this.favoriteSeason == "") {
+      alert("Escolha um jogador")
+    }
+    if (found?.situacao == false) {
+      alert("Escolha um jogador ativo")
+    }
+    else {
+      this.servico.pushPartida(this.favoriteSeason, this.controlePartidas).subscribe(
+        res => {
+          this.controlePartidas += 1;
+          this.servico.addVencedorAlert(res)
+          this.favoriteSeason = ""
+          this.avisaVencedor.emit(res.vencedor)
+        }
+      )
+    }
   }
 
   exclusaoEscultada() {
@@ -48,12 +58,17 @@ export class VitoriaComponent implements OnInit {
 
 
 
+
+
+
+
   }
 
   repassandoEmit(nome: string) {
 
     this.repassandoAExclusao.emit(nome);
   }
+
 
 
 

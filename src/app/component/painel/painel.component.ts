@@ -12,6 +12,8 @@ export class PainelComponent  implements OnInit {
 
 valorDaPartida: number = 2.50
 jogadores:Jogador[] = [];
+public situacaoContainerPagamento: boolean = false;
+public pagador: string = ""
 
 
 constructor(private servico: servico) {
@@ -146,6 +148,16 @@ corrigeSaldo(nome: string) {
 
   let listaFinal = novaListaAtiva.concat(listaInativa)
   return this.jogadores = listaFinal
+}
+
+pagamento(nome: any) {
+  this.situacaoContainerPagamento = true
+  this.pagador = nome
+
+}
+
+fechaContainerPagamento() {
+  this.situacaoContainerPagamento = false
 }
 
 

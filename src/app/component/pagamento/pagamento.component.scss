@@ -9,10 +9,34 @@ body{
 }
 h1{
   margin: 5px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 p{
   margin: 0px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+select{
+  margin-left: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+footer{
+  display: flex;
+  justify-content: space-between;
+}
+input{
+  display: flex;
+  margin-left: 70px;
+  width: 160px;
+  padding: 8px;
+  margin-left: 20px;
 }
 
 .iconPagador{
@@ -32,6 +56,7 @@ p{
   margin-left: 120px;
 
 }
+
 
 
 
@@ -65,9 +90,18 @@ p{
 
 }
 
-.botao{
-  margin-left: 513px;
-
+button{
+  margin-right: 20px;
 }
+
+.divCancelar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee ;
+  margin-top: -36px;
+}
+
+
 
 

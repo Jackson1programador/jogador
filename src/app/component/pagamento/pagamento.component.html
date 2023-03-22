@@ -1,36 +1,67 @@
 <body>
-  <header>
+  <form #form="ngForm" (ngSubmit)="efetivaPagamento(form)">
+    <header>
 
 
-    <mat-toolbar color="primary">
-      <span>Transferencia entre jogadores</span>
-      <span class="example-spacer"></span>
-    </mat-toolbar>
+      <mat-toolbar color="primary">
+        <span>Transferencia entre jogadores</span>
+        <span class="example-spacer"></span>
+      </mat-toolbar>
 
-  </header>
+    </header>
 
-  <main class="container-pagamento">
-    <div class="pagador">
-      <h1>Devedor</h1>
-      <p>fulando de tal</p>
-      <mat-icon class="iconPagador">arrow_downward</mat-icon>
+    <main class="container-pagamento">
+      <div class="pagador">
+        <h1>Devedor</h1>
+        <p>{{pagador}}</p>
+        <mat-icon class="iconPagador">arrow_downward</mat-icon>
 
+      </div>
+
+
+      <div class="recebedor">
+        <h1>Credor</h1>
+        <!-- <p>fulando de tal</p> -->
+
+          <select name="recebedor" ngModel>
+            <option value=""> Selecione o destinatário</option>
+            <option *ngFor="let item of jogadores" [value]="item.nome" >
+            {{item.nome}}
+
+            </option>
+          </select>
+
+
+
+        <mat-icon class="iconRecebedor">arrow_upward</mat-icon>
+
+      </div>
+    </main>
+
+
+      <footer>
+        <div>
+          <input type="number" placeholder="Valor" name="nome" required [(ngModel)]="valor">
+        </div>
+
+        <div>
+          <button [disabled]="form.invalid" mat-raised-button color="primary" class="botao">Efetivar Pagamento</button>
+        </div>
+
+
+
+      </footer>
+
+
+    </form>
+
+    <div class="divCancelar">
+      <button mat-raised-button color="warn" class="botao" id="cancelar" (click)="cancelarPagamento()">Cancelar</button>
     </div>
 
 
-    <div class="recebedor">
-      <h1>Credor</h1>
-      <p>fulando de tal</p>
-      <mat-icon class="iconRecebedor">arrow_upward</mat-icon>
-
-    </div>
-  </main>
 
 
-  <footer>
-    <button mat-raised-button color="primary" class="botao">Efetivar Pagamento</button>
-
-  </footer>
 
 
 
