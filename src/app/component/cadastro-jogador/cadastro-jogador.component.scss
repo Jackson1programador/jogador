@@ -1,7 +1,14 @@
 .container {
   background-color: #eeeeee;
   margin: auto;
+  padding: 0.5rem;
+  box-sizing: border-box;
 
+
+
+}
+.container-input{
+  display: flex;
 }
 
 :host {
@@ -11,18 +18,27 @@
 }
 
 .botao {
-  margin-right: 1em;
-  margin-left: 2em;
+  margin-left: 1rem;
+
+
 }
 
 .input {
   padding-left: 1em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  margin-left: 1em;
+  box-sizing: border-box;
+
+
 }
 .titulo {
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    width: 90%;
+  }
 }
 
 

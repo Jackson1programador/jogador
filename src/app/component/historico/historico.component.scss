@@ -10,12 +10,21 @@
   margin-top: 2em;
 
 
+
 }
 
 .boxHistorico{
   width: 30%;
   background-color: #eeeeee;
   margin-bottom: 2em;
+
+}
+
+@media screen and (max-width: 768px) {
+  .boxHistorico{
+    width: 90%;
+
+  }
 }
 
 .containerCard {

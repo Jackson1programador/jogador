@@ -16,6 +16,7 @@
   justify-content: center;
 
 
+
 }
 
 .box {
@@ -23,6 +24,13 @@
   background-color:  #eeeeee;
   margin-top: 20px;
 
+
+}
+
+@media screen and (max-width: 768px) {
+  .box{
+    width: 90%;
+  }
 }
 
 .ganhador{

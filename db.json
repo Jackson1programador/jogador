@@ -1,54 +1,25 @@
 {
   "jogadores": [
     {
-      "nome": "Jackson",
+      "nome": "jackson",
       "situacao": true,
-      "saldo": 1012.5,
+      "saldo": 5,
       "imagem": "teste",
       "id": 1
     },
     {
-      "nome": "Fagner",
-      "situacao": true,
-      "saldo": -800,
-      "imagem": "teste",
-      "id": 2
-    },
-    {
-      "nome": "Wagner",
+      "nome": "wagner",
       "situacao": true,
       "saldo": 0,
       "imagem": "teste",
-      "id": 3
-    },
-    {
-      "nome": "Nonato",
-      "situacao": true,
-      "saldo": 530,
-      "imagem": "teste",
-      "id": 4
+      "id": 2
     }
   ],
   "partidas": [
     {
-      "vencedor": "Jackson",
+      "vencedor": "jackson",
       "partida": 1,
       "id": 1
-    },
-    {
-      "vencedor": "Jackson",
-      "partida": 2,
-      "id": 2
-    },
-    {
-      "vencedor": "Fagner",
-      "partida": 3,
-      "id": 3
-    },
-    {
-      "vencedor": "Jackson",
-      "partida": 4,
-      "id": 4
     }
   ]
 }
