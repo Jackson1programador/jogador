@@ -19,6 +19,10 @@ export class servico {
   public vencedorEmitEvent = new EventEmitter();
   public apagandoVencedorEmitEvent = new EventEmitter();
 
+  public emitEventFront = new EventEmitter();
+  public vencedorEmitEventFront = new EventEmitter();
+  public apagandoVencedorEmitEventFront = new EventEmitter();
+
 
   constructor(private http: HttpClient) {}
 
@@ -86,6 +90,15 @@ excluiVencedorBackEnd(index: number): Observable<any>{
   )
 }
 
+//lógica pro app funcionar sem back-end
+public jogadorObject: any = [];
+
+pushJogadorFront(nome: string): Observable<Jogador> {
+  var jogador: any = {nome: nome, situacao: true, saldo:0, imagem:"teste" }
+  this.jogadorObject.push(jogador);
+  this.emitEventFront.emit(jogador);
+  return jogador
+}
 
 
 

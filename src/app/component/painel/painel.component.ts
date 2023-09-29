@@ -15,6 +15,12 @@ jogadores:Jogador[] = [];
 public situacaoContainerPagamento: boolean = false;
 public pagador: string = ""
 
+jogadoresFront:Jogador[] = [];
+jogadoresBack:Jogador[] = [];
+
+
+
+
 
 constructor(private servico: servico) {
 
@@ -32,7 +38,17 @@ ngOnInit(): void {
   this.servico.emitEvent.subscribe(
     res => {
       alert(`Jogador ${res.nome} cadastrado`);
-      return this.jogadores.push(res);
+      this.jogadoresBack.push(res);
+      this.verificaBack()
+
+    }
+  );
+
+  this.servico.emitEventFront.subscribe(
+    res => {
+      alert(`Jogador ${res.nome} cadastrado`);
+      this.jogadoresFront.push(res);
+      this.verificaBack()
     }
   );
 
@@ -40,6 +56,15 @@ ngOnInit(): void {
 
 
 
+
+}
+
+verificaBack(){
+  if(this.jogadoresBack.length > 0){
+    this.jogadores = this.jogadoresBack
+  } else{
+    this.jogadores = this.jogadoresFront
+  }
 }
 
 deletarJogador(Id: number) {

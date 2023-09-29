@@ -1,18 +1,11 @@
 {
   "jogadores": [
     {
-      "nome": "jackson",
-      "situacao": true,
-      "saldo": 5,
-      "imagem": "teste",
-      "id": 1
-    },
-    {
-      "nome": "wagner",
+      "nome": "teste",
       "situacao": true,
       "saldo": 0,
       "imagem": "teste",
-      "id": 2
+      "id": 1
     }
   ],
   "partidas": [

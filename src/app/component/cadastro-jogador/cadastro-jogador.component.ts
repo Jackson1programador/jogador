@@ -26,4 +26,12 @@ export class CadastroJogadorComponent implements OnInit {
     )
   }
 
+// lógica rpo app funcionar sem o back-end
+  addJogadorFront(nome: string) {
+    this.servico.pushJogadorFront(nome);
+    this.jogador = '';
+  }
+
+
+
 }
