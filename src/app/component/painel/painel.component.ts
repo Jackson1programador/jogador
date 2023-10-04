@@ -47,7 +47,10 @@ ngOnInit(): void {
   this.servico.emitEventFront.subscribe(
     res => {
       alert(`Jogador ${res.nome} cadastrado`);
-      this.jogadoresFront.push(res);
+      const jogadorSemId = res
+      const Id = (this.jogadoresFront.length) + 1
+      jogadorSemId.id = Id
+      this.jogadoresFront.push(jogadorSemId);
       this.verificaBack()
     }
   );
@@ -79,6 +82,15 @@ deletarJogador(Id: number) {
   )
 }
 
+deletarJogadorFront(Id: number) {
+      this.jogadoresFront = this.jogadoresFront.filter(
+        item => {
+          return Id !== item.id
+        }
+      )
+      this.verificaBack()
+}
+
 alteraSituacaoJogador(id: number, situacao: boolean, index: number, nome: string, saldo: number) {
   situacao = !situacao;
   this.servico.editaSituacaoJogador(id, situacao, saldo, nome ).subscribe(
@@ -87,6 +99,15 @@ alteraSituacaoJogador(id: number, situacao: boolean, index: number, nome: string
     }
 
   )
+}
+
+alteraSituacaoJogadorFront (id: number) {
+  this.jogadoresFront.forEach((elemento)=> {
+    if(elemento.id == id ){
+       elemento.situacao = !elemento.situacao
+    }
+  })
+  this.verificaBack()
 }
 
 atualizaSaldo(id: number, situacao: boolean, saldo:number, nome: string){
@@ -112,6 +133,8 @@ alteraSaldo(nome: string)  {
     }
   })
 
+
+
   listaAtiva.forEach(element => {
     this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
     return
@@ -119,6 +142,30 @@ alteraSaldo(nome: string)  {
 
   let listaFinal = novaListaAtiva.concat(listaInativa)
   return this.jogadores = listaFinal
+}
+
+alteraSaldoFront(nome: string)  {
+  let valor = this.valorDaPartida;
+  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativoFront();
+  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivoFront();
+
+  let novaListaAtiva = listaAtiva.map((element) => {
+    if(element.nome == nome) {
+      element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
+      return element
+    } else {
+      element.saldo = element.saldo - valor
+      return element
+    }
+  })
+
+
+
+  let listaFinal = novaListaAtiva.concat(listaInativa)
+  this.jogadoresFront = listaFinal
+  console.log(this.jogadoresFront)
+  this.verificaBack()
+  return this.jogadoresFront
 }
 
 
@@ -129,6 +176,16 @@ criaListaDeJogadoresSoAtivo () {
 
 criaListaDeJogadoresSoInativo () {
   let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao !== true);
+  return lista
+}
+
+criaListaDeJogadoresSoAtivoFront () {
+  let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao === true);
+   return lista
+}
+
+criaListaDeJogadoresSoInativoFront () {
+  let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao !== true);
   return lista
 }
 

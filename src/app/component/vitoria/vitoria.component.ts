@@ -11,6 +11,7 @@ export class VitoriaComponent implements OnInit {
   favoriteSeason: string = "";
     @Input() public jogadores: Jogador[] = [];
     @Output() public avisaVencedor = new EventEmitter();
+    @Output() public avisaVencedorFront = new EventEmitter();
     @Output() public repassandoAExclusao = new EventEmitter();
 
 
@@ -38,6 +39,24 @@ export class VitoriaComponent implements OnInit {
           this.avisaVencedor.emit(res.vencedor)
         }
       )
+    }
+  }
+
+  escolherVencedorFront() {
+    let found = this.jogadores.find( element => element.nome == this.favoriteSeason )
+
+
+    if(this.favoriteSeason == "") {
+      alert("Escolha um jogador")
+    }
+    if (found?.situacao == false) {
+      alert("Escolha um jogador ativo")
+    }
+    else {
+      this.servico.pushPartidaFront(this.favoriteSeason, this.controlePartidas)
+      this.controlePartidas += 1;
+      this.avisaVencedorFront.emit(this.favoriteSeason)
+      this.favoriteSeason = ""
     }
   }
 

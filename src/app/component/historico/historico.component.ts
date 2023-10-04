@@ -12,7 +12,7 @@ export class HistoricoComponent implements OnInit {
   partidas: Partidas[] = [];
   @Output() public avisarQueHouveUmaExclusao = new EventEmitter();
   @Output() public avisarQueHouveAMesmaExclusao = new EventEmitter();
-
+  controladorDePartidaFront: number = 1;
 
   constructor (private servico: servico) {}
 
@@ -27,6 +27,25 @@ ngOnInit(): void {
     res => {
       alert(`Vencedor é ${res.vencedor}`)
       return this.partidas.push(res);
+    }
+  )
+
+  this.servico.vencedorEmitEventFront.subscribe(
+    res => {
+      alert(`Vencedor é ${res.vencedor}`)
+
+      var partidaAtual = {vencedor: "nome", id: 0, partida: 0 };
+      partidaAtual.vencedor = res.vencedor
+      partidaAtual.partida = res.partida
+      partidaAtual.id = this.controladorDePartidaFront
+
+      this.controladorDePartidaFront += 1
+      console.log(partidaAtual)
+      console.log(res)
+      this.partidas.push(partidaAtual)
+      return partidaAtual;
+
+
     }
   )
 

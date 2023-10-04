@@ -21,6 +21,7 @@ export class servico {
 
   public emitEventFront = new EventEmitter();
   public vencedorEmitEventFront = new EventEmitter();
+  public vencedorEmitEventAlertFront = new EventEmitter();
   public apagandoVencedorEmitEventFront = new EventEmitter();
 
 
@@ -94,13 +95,20 @@ excluiVencedorBackEnd(index: number): Observable<any>{
 public jogadorObject: any = [];
 
 pushJogadorFront(nome: string): Observable<Jogador> {
-  var jogador: any = {nome: nome, situacao: true, saldo:0, imagem:"teste" }
+  var jogador: any = {nome: nome, situacao: true, saldo:0, imagem:"teste", id: 0 }
   this.jogadorObject.push(jogador);
   this.emitEventFront.emit(jogador);
   return jogador
 }
 
+pushPartidaFront(nome: string, partida: number): Observable<Partidas> {
+  var partidaAtual: any = {vencedor:nome, partida: partida}
+  this.vencedorEmitEventFront.emit(partidaAtual)
+  return partidaAtual
+}
 
-
+addVencedorAlertFront(value: Partidas) {
+  return this.vencedorEmitEventAlertFront.emit(value);
+}
 
 }

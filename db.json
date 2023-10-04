@@ -6,6 +6,27 @@
       "saldo": 0,
       "imagem": "teste",
       "id": 1
+    },
+    {
+      "nome": "jackson",
+      "situacao": true,
+      "saldo": -2.5,
+      "imagem": "teste",
+      "id": 2
+    },
+    {
+      "nome": "jack",
+      "situacao": true,
+      "saldo": -2.5,
+      "imagem": "teste",
+      "id": 3
+    },
+    {
+      "nome": "teste",
+      "situacao": true,
+      "saldo": 5,
+      "imagem": "teste",
+      "id": 5
     }
   ],
   "partidas": [
@@ -13,6 +34,11 @@
       "vencedor": "jackson",
       "partida": 1,
       "id": 1
+    },
+    {
+      "vencedor": "teste",
+      "partida": 2,
+      "id": 2
     }
   ]
 }
