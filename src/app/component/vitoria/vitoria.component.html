@@ -45,4 +45,9 @@
 
  </div>
 
- <app-historico (avisarQueHouveAMesmaExclusao)="repassandoEmit($event)" (avisarQueHouveUmaExclusao)="exclusaoEscultada()"></app-historico>
+ <app-historico
+ (avisarQueHouveAMesmaExclusao)="repassandoEmit($event)" (avisarQueHouveUmaExclusao)="exclusaoEscultada()"
+ (avisarQueHouveAMesmaExclusaoFront)="repassandoEmitFront($event)" (avisarQueHouveUmaExclusaoFront)="exclusaoEscultadaFront()"
+ >
+
+ </app-historico>

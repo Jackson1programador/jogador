@@ -10,239 +10,273 @@ import { Jogador } from 'src/app/Jogador';
 })
 export class PainelComponent  implements OnInit {
 
-valorDaPartida: number = 2.50
-jogadores:Jogador[] = [];
-public situacaoContainerPagamento: boolean = false;
-public pagador: string = ""
+  valorDaPartida: number = 2.50
+  jogadores:Jogador[] = [];
+  jogadoresFront:Jogador[] = [];
+  jogadoresBack:Jogador[] = [];
+  public situacaoContainerPagamento: boolean = false;
+  public pagador: string = "";
+  backEndActive:Boolean = false;
 
-jogadoresFront:Jogador[] = [];
-jogadoresBack:Jogador[] = [];
+  constructor(private servico: servico) {}
 
+  ngOnInit(): void {
 
-
-
-
-constructor(private servico: servico) {
-
-}
-
-ngOnInit(): void {
-
-
-  this.servico.getAll().subscribe(
-    res => this.jogadores = res
-
-  );
-
-
-  this.servico.emitEvent.subscribe(
-    res => {
-      alert(`Jogador ${res.nome} cadastrado`);
-      this.jogadoresBack.push(res);
-      this.verificaBack()
-
+    if (confirm('Subiu o servido backend? Se sim => clique em OK / Se não => clique em cancelar')) {
+        this.backEndActive = true
     }
-  );
 
-  this.servico.emitEventFront.subscribe(
-    res => {
-      alert(`Jogador ${res.nome} cadastrado`);
-      const jogadorSemId = res
-      const Id = (this.jogadoresFront.length) + 1
-      jogadorSemId.id = Id
-      this.jogadoresFront.push(jogadorSemId);
-      this.verificaBack()
+    this.servico.backEndActive = this.backEndActive;
+
+    if(this.backEndActive){
+      this.servico.getAll().subscribe(
+        res => this.jogadores = res );
     }
-  );
 
+    if(this.backEndActive){
+      this.servico.emitEvent.subscribe(
+        res => {
+          alert(`Jogador ${res.nome} cadastrado`);
+          this.jogadoresBack.push(res);
+          this.verificaBack()
+        })
+      };
 
+    if(!this.backEndActive){
+      this.servico.emitEventFront.subscribe(
+        res => {
+          alert(`Jogador ${res.nome} cadastrado`);
+          const jogadorSemId = res
+          const Id = (this.jogadoresFront.length) + 1
+          jogadorSemId.id = Id
+          this.jogadoresFront.push(jogadorSemId);
+          this.verificaBack()
+        })
+    };
 
-
-
-
-}
-
-verificaBack(){
-  if(this.jogadoresBack.length > 0){
-    this.jogadores = this.jogadoresBack
-  } else{
-    this.jogadores = this.jogadoresFront
   }
-}
 
-deletarJogador(Id: number) {
-  this.servico.deletaJogador(Id).subscribe(
-    res => {
-      this.jogadores = this.jogadores.filter(
-        item => {
-          return Id !== item.id
+  verificaBack(){
+    if(this.jogadoresBack.length > 0){
+      this.jogadores = this.jogadoresBack
+    } else{
+      this.jogadores = this.jogadoresFront
+    }
+  }
+
+  deletarJogador(jogador: Jogador) {
+    if(this.backEndActive){
+      if(jogador.saldo == 0){
+        this.servico.deletaJogador(jogador.id).subscribe(
+          res => {
+            this.jogadores = this.jogadores.filter(
+              item => {
+                return jogador.id !== item.id
+              }
+            )
+          }
+        )
+      } else{
+        alert(`O jogador ${jogador.nome} não possui saldo zerado`)
+      }
+    }
+  }
+
+  deletarJogadorFront(jogador: Jogador) {
+    if(!this.backEndActive){
+      if(jogador.saldo == 0){
+        this.jogadoresFront = this.jogadoresFront.filter(
+          item => {
+            return jogador.id !== item.id
+          }
+        )
+        this.verificaBack()
+      }  else{
+        alert(`O jogador ${jogador.nome} não possui saldo zerado`)
+      }
+    }
+
+  }
+
+  alteraSituacaoJogador(id: number, situacao: boolean, index: number, nome: string, saldo: number) {
+    if(this.backEndActive){
+      situacao = !situacao;
+      this.servico.editaSituacaoJogador(id, situacao, saldo, nome ).subscribe(
+        res =>  {
+        return  this.jogadores[index].situacao = res.situacao
         }
       )
     }
-  )
-}
+  }
 
-deletarJogadorFront(Id: number) {
-      this.jogadoresFront = this.jogadoresFront.filter(
-        item => {
-          return Id !== item.id
+  alteraSituacaoJogadorFront (id: number) {
+    if(!this.backEndActive){
+      this.jogadoresFront.forEach((elemento)=> {
+        if(elemento.id == id ){
+          elemento.situacao = !elemento.situacao
         }
-      )
+      })
       this.verificaBack()
-}
-
-alteraSituacaoJogador(id: number, situacao: boolean, index: number, nome: string, saldo: number) {
-  situacao = !situacao;
-  this.servico.editaSituacaoJogador(id, situacao, saldo, nome ).subscribe(
-    res =>  {
-    return  this.jogadores[index].situacao = res.situacao
     }
+  }
 
-  )
-}
+  atualizaSaldo(id: number, situacao: boolean, saldo:number, nome: string){
+    this.servico.editaSituacaoJogador(id, situacao, saldo, nome).subscribe(
+      res => {
+        return
+      }
+    )
+  }
 
-alteraSituacaoJogadorFront (id: number) {
-  this.jogadoresFront.forEach((elemento)=> {
-    if(elemento.id == id ){
-       elemento.situacao = !elemento.situacao
-    }
-  })
-  this.verificaBack()
-}
+  alteraSaldo(nome: string)  {
+    if(this.backEndActive){
+      let valor = this.valorDaPartida;
+      let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
+      let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
 
-atualizaSaldo(id: number, situacao: boolean, saldo:number, nome: string){
-  this.servico.editaSituacaoJogador(id, situacao, saldo, nome).subscribe(
-    res => {
+      let novaListaAtiva = listaAtiva.map((element) => {
+        if(element.nome == nome) {
+          element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
+          return element
+        } else {
+          element.saldo = element.saldo - valor
+          return element
+        }
+      })
+
+      listaAtiva.forEach(element => {
+        this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
+        return
+      })});
+
+      let listaFinal = novaListaAtiva.concat(listaInativa)
+      return this.jogadores = listaFinal
+    } else{
       return
     }
-  )
-}
-
-alteraSaldo(nome: string)  {
-  let valor = this.valorDaPartida;
-  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
-  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
-
-  let novaListaAtiva = listaAtiva.map((element) => {
-    if(element.nome == nome) {
-      element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
-      return element
-    } else {
-      element.saldo = element.saldo - valor
-      return element
-    }
-  })
-
-
-
-  listaAtiva.forEach(element => {
-    this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
-    return
-   })});
-
-  let listaFinal = novaListaAtiva.concat(listaInativa)
-  return this.jogadores = listaFinal
-}
-
-alteraSaldoFront(nome: string)  {
-  let valor = this.valorDaPartida;
-  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativoFront();
-  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivoFront();
-
-  let novaListaAtiva = listaAtiva.map((element) => {
-    if(element.nome == nome) {
-      element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
-      return element
-    } else {
-      element.saldo = element.saldo - valor
-      return element
-    }
-  })
-
-
-
-  let listaFinal = novaListaAtiva.concat(listaInativa)
-  this.jogadoresFront = listaFinal
-  console.log(this.jogadoresFront)
-  this.verificaBack()
-  return this.jogadoresFront
-}
-
-
-criaListaDeJogadoresSoAtivo () {
-  let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao === true);
-   return lista
-}
-
-criaListaDeJogadoresSoInativo () {
-  let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao !== true);
-  return lista
-}
-
-criaListaDeJogadoresSoAtivoFront () {
-  let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao === true);
-   return lista
-}
-
-criaListaDeJogadoresSoInativoFront () {
-  let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao !== true);
-  return lista
-}
-
-eInativo(situacao: boolean) {
-  return !situacao
-}
-
-eSaldoPositivo(saldo: number) {
-  if(saldo > 0 ) {
-    return true
   }
-   return false
-}
 
-eSaldoNegativo(saldo: number) {
-  if(saldo < 0 ) {
-    return true
-  }
-  return false
-}
+  alteraSaldoFront(nome: string)  {
+    if(!this.backEndActive){
+      let valor = this.valorDaPartida;
+      let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativoFront();
+      let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivoFront();
 
+      let novaListaAtiva = listaAtiva.map((element) => {
+        if(element.nome == nome) {
+          element.saldo = element.saldo + (valor * (listaAtiva.length - 1))
+          return element
+        } else {
+          element.saldo = element.saldo - valor
+          return element
+        }
+      })
 
-corrigeSaldo(nome: string) {
-  let valor = this.valorDaPartida;
-  let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
-  let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
-
-  let novaListaAtiva = listaAtiva.map((element) => {
-    if(element.nome == nome) {
-      element.saldo = element.saldo - (valor * (listaAtiva.length - 1))
-      return element
-    } else {
-      element.saldo = element.saldo + valor
-      return element
+      let listaFinal = novaListaAtiva.concat(listaInativa)
+      this.jogadoresFront = listaFinal
+      this.verificaBack()
+      return this.jogadoresFront
+    } else{
+      return
     }
-  })
+  }
 
-  listaAtiva.forEach(element => {
-    this.servico.editaSituacaoJogador(element.id, element.situacao, element.saldo, element.nome).subscribe(res => {
-    return
-   })});
+  criaListaDeJogadoresSoAtivo () {
+    let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao === true);
+    return lista
+  }
 
-  let listaFinal = novaListaAtiva.concat(listaInativa)
-  return this.jogadores = listaFinal
-}
+  criaListaDeJogadoresSoInativo () {
+    let lista: Jogador[] = this.jogadores.filter(elemento => elemento.situacao !== true);
+    return lista
+  }
 
-pagamento(nome: any) {
-  this.situacaoContainerPagamento = true
-  this.pagador = nome
+  criaListaDeJogadoresSoAtivoFront () {
+    let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao === true);
+    return lista
+  }
 
-}
+  criaListaDeJogadoresSoInativoFront () {
+    let lista: Jogador[] = this.jogadoresFront.filter(elemento => elemento.situacao !== true);
+    return lista
+  }
 
-fechaContainerPagamento() {
-  this.situacaoContainerPagamento = false
-}
+  eInativo(situacao: boolean) {
+    return !situacao
+  }
 
+  eSaldoPositivo(saldo: number) {
+    if(saldo > 0 ) {
+      return true
+    }
+    return false
+  }
 
+  eSaldoNegativo(saldo: number) {
+    if(saldo < 0 ) {
+      return true
+    }
+    return false
+  }
+
+  corrigeSaldo(nome: string) {
+    if(this.backEndActive){
+      let valor = this.valorDaPartida;
+      let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativo();
+      let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivo();
+
+      let novaListaAtiva = listaAtiva.map((element) => {
+        if(element.nome == nome) {
+          element.saldo = element.saldo - (valor * (listaAtiva.length - 1))
+          return element
+        } else {
+          element.saldo = element.saldo + valor
+          return element
+        }
+      })
+
+      let listaFinal = novaListaAtiva.concat(listaInativa)
+      this.jogadoresFront = listaFinal
+      this.verificaBack()
+      return  this.jogadoresFront
+    } else{
+      return
+    }
+
+  }
+
+  corrigeSaldoFront(nome: string) {
+    if(!this.backEndActive){
+      let valor = this.valorDaPartida;
+      let listaInativa: Jogador[] = this.criaListaDeJogadoresSoInativoFront();
+      let listaAtiva: Jogador[] = this.criaListaDeJogadoresSoAtivoFront();
+
+      let novaListaAtiva = listaAtiva.map((element) => {
+        if(element.nome == nome) {
+          element.saldo = element.saldo - (valor * (listaAtiva.length - 1))
+          return element
+        } else {
+          element.saldo = element.saldo + valor
+          return element
+        }
+      })
+
+      let listaFinal = novaListaAtiva.concat(listaInativa)
+      return this.jogadores = listaFinal
+    } else{
+      return
+    }
+  }
+
+  pagamento(nome: any) {
+    this.situacaoContainerPagamento = true
+    this.pagador = nome
+
+  }
+
+  fechaContainerPagamento() {
+    this.situacaoContainerPagamento = false
+  }
 
 
 }

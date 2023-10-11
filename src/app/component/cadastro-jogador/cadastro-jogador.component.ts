@@ -10,26 +10,35 @@ import { Component, OnInit} from '@angular/core';
 export class CadastroJogadorComponent implements OnInit {
 
   jogador: string = '';
+  backEndActive:Boolean = false;
 
   constructor(private servico: servico) {
 
    }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.backEndActive = this.servico.backEndActive;
+  }
 
   addJogador(nome: string) {
-    return this.servico.pushJogador(nome).subscribe(
-      res => {
-        this.servico.addJogadorAlert(res);
-        this.jogador = '';
-      }
-    )
+    if(this.backEndActive){
+      return this.servico.pushJogador(nome).subscribe(
+        res => {
+          this.servico.addJogadorAlert(res);
+          this.jogador = '';
+        }
+      )
+    } else return
+
   }
 
 // lógica rpo app funcionar sem o back-end
   addJogadorFront(nome: string) {
-    this.servico.pushJogadorFront(nome);
-    this.jogador = '';
+    if(!this.backEndActive){
+      this.servico.pushJogadorFront(nome);
+      this.jogador = '';
+    }
+
   }
 
 

@@ -12,7 +12,7 @@
         <mat-card class="históricoCard, containerCard">
           <mat-card-content>Ganhdador da partida {{item.partida}} é:  {{item.vencedor}}
           <button  mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" color="primary" (click)="excluiVencedor(item.id
-          )" [disabled]="index != (partidas.length - 1)"><mat-icon>delete</mat-icon></button>
+          )" (click)="excluiVencedorFront(item.id)" [disabled]="index != (partidas.length - 1)"><mat-icon>delete</mat-icon></button>
 
           </mat-card-content>
         </mat-card>

@@ -9,19 +9,21 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PagamentoComponent implements OnInit {
 
-  constructor (private servico: servico) {}
-
   @Input() public jogadores: Jogador[] = [];
   @Input() public pagador: string = ""
   @Output() public fechaContainerPagamento: any = new EventEmitter()
   public recebedor:string = ""
-
+  backEndActive:Boolean = false;
   public valor!: number
+
+  constructor (private servico: servico) {}
+
+  ngOnInit(): void {
+    this.backEndActive = this.servico.backEndActive
+  }
 
   efetivaPagamento(nome: any) {
     this.recebedor = nome.value.recebedor
-    console.log(nome.value.recebedor)
-    console.log(this.valor)
 
     if(nome.value.recebedor == "") {
       alert("Selecione o jogador que vai receber o dinheiro")
@@ -35,26 +37,16 @@ export class PagamentoComponent implements OnInit {
         return item
      })
 
-      console.log(novaLista)
-
-      novaLista.forEach( (item) => {
-        this.servico.editaSituacaoJogador(item.id, item.situacao, item.saldo, item.nome ).subscribe(
-          res => res
-        )
-      })
+      if(this.backEndActive){
+        novaLista.forEach( (item) => {
+          this.servico.editaSituacaoJogador(item.id, item.situacao, item.saldo, item.nome ).subscribe(
+            res => res
+          )
+        })
+      }
 
       this.fechaContainerPagamento.emit()
-
     }
-
-
-
-
-
-
-  }
-
-  ngOnInit(): void {
 
   }
 

@@ -7,6 +7,12 @@ body{
 
 
 }
+@media screen and (max-width: 768px) {
+  body{
+    width: 98%;
+
+  }
+}
 h1{
   margin: 5px 100px;
   display: flex;
@@ -45,8 +51,15 @@ input{
   width: 100px;
   height: 70px;
   margin-left: 120px;
-
 }
+@media screen and (max-width: 768px) {
+  .iconPagador{
+    margin-left: initial;
+    margin: auto;
+  }
+}
+
+
 
 .iconRecebedor{
   color: blue;
@@ -55,6 +68,12 @@ input{
   height: 70px;
   margin-left: 120px;
 
+}
+@media screen and (max-width: 768px) {
+  .iconRecebedor{
+    margin-left: initial;
+    margin: auto;
+  }
 }
 
 
@@ -76,11 +95,18 @@ input{
   margin-top: 10px;
   margin-left: 20px;
   margin-bottom: 20px;
-
-
-
 }
 
+@media screen and (max-width: 768px) {
+  .pagador{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+  }
+}
 .recebedor{
   background-color: rgb(100, 100, 255, 0.5);
   width: 45%;
@@ -89,6 +115,26 @@ input{
   margin-bottom: 20px;
 
 }
+@media screen and (max-width: 768px) {
+  .recebedor{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+  }
+}
+
+@media screen and (max-width: 768px) {
+  select{
+    display: inline-block;
+    margin: auto;
+
+  }
+}
+
+
 
 button{
   margin-right: 20px;
