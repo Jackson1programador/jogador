@@ -3,38 +3,24 @@
     {
       "nome": "teste",
       "situacao": true,
-      "saldo": 0,
+      "saldo": 5,
       "imagem": "teste",
       "id": 1
     },
     {
       "nome": "brenna",
       "situacao": true,
-      "saldo": 0,
+      "saldo": -2.5,
       "imagem": "teste",
       "id": 4
+    },
+    {
+      "nome": "jack",
+      "situacao": true,
+      "saldo": 0,
+      "imagem": "teste",
+      "id": 5
     }
   ],
-  "partidas": [
-    {
-      "vencedor": "jackson",
-      "partida": 1,
-      "id": 1
-    },
-    {
-      "vencedor": "teste",
-      "partida": 2,
-      "id": 2
-    },
-    {
-      "vencedor": "jack",
-      "partida": 3,
-      "id": 3
-    },
-    {
-      "vencedor": "brenna",
-      "partida": 4,
-      "id": 4
-    }
-  ]
+  "partidas": []
 }

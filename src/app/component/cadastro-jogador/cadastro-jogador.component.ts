@@ -18,6 +18,11 @@ export class CadastroJogadorComponent implements OnInit {
 
   ngOnInit(): void {
     this.backEndActive = this.servico.backEndActive;
+    console.log(this.backEndActive)
+
+    this.servico.avisaQueOBackSubiu.subscribe(
+      res => {this.backEndActive = res;
+    })
   }
 
   addJogador(nome: string) {
@@ -32,7 +37,7 @@ export class CadastroJogadorComponent implements OnInit {
 
   }
 
-// lógica rpo app funcionar sem o back-end
+  // lógica rpo app funcionar sem o back-end
   addJogadorFront(nome: string) {
     if(!this.backEndActive){
       this.servico.pushJogadorFront(nome);
@@ -40,6 +45,8 @@ export class CadastroJogadorComponent implements OnInit {
     }
 
   }
+
+
 
 
 

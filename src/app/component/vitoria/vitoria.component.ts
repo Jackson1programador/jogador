@@ -23,6 +23,9 @@ export class VitoriaComponent implements OnInit {
   ngOnInit(): void {
 
     this.backEndActive = this.servico.backEndActive
+    this.servico.avisaQueOBackSubiu.subscribe(
+      res => {this.backEndActive = res;
+    })
 
     if(this.backEndActive){
       this.servico.getAllHistorico().subscribe(

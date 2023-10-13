@@ -24,6 +24,8 @@ export class PainelComponent  implements OnInit {
 
     if (confirm('Subiu o servido backend? Se sim => clique em OK / Se não => clique em cancelar')) {
         this.backEndActive = true
+        this.servico.InformaQueTemBackEnd()
+
     }
 
     this.servico.backEndActive = this.backEndActive;
@@ -58,7 +60,7 @@ export class PainelComponent  implements OnInit {
 
   verificaBack(){
     if(this.jogadoresBack.length > 0){
-      this.jogadores = this.jogadoresBack
+      this.jogadores = this.jogadores.concat(this.jogadoresBack)
     } else{
       this.jogadores = this.jogadoresFront
     }

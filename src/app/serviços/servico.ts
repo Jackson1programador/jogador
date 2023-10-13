@@ -19,6 +19,7 @@ export class servico {
   public emitEvent = new EventEmitter();
   public vencedorEmitEvent = new EventEmitter();
   public apagandoVencedorEmitEvent = new EventEmitter();
+  public avisaQueOBackSubiu = new EventEmitter();
 
   public emitEventFront = new EventEmitter();
   public vencedorEmitEventFront = new EventEmitter();
@@ -81,6 +82,11 @@ export class servico {
     return this.http.delete(`${this.apiUrlPartidas}/${index}`).pipe(
       res => res,
     )
+  }
+
+  InformaQueTemBackEnd(){
+    this.backEndActive = true;
+    this.avisaQueOBackSubiu.emit(this.backEndActive)
   }
 
   //lógica pro app funcionar sem back-end
