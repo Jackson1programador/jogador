@@ -19,6 +19,10 @@ import { VitoriaComponent } from './component/vitoria/vitoria.component';
 import { HistoricoComponent } from './component/historico/historico.component';
 import { RodapeComponent } from './component/rodape/rodape.component';
 import { PagamentoComponent } from './component/pagamento/pagamento.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './component/dialog/dialog.component';
+
+
 
 
 
@@ -34,6 +38,8 @@ import { PagamentoComponent } from './component/pagamento/pagamento.component';
     HistoricoComponent,
     RodapeComponent,
     PagamentoComponent,
+    DialogComponent,
+
 
 
 
@@ -54,6 +60,7 @@ import { PagamentoComponent } from './component/pagamento/pagamento.component';
     MatRadioModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatDialogModule
 
 
 

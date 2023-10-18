@@ -17,8 +17,6 @@ export class CadastroJogadorComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.backEndActive = this.servico.backEndActive;
-    console.log(this.backEndActive)
 
     this.servico.avisaQueOBackSubiu.subscribe(
       res => {this.backEndActive = res;

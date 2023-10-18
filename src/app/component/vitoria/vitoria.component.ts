@@ -25,13 +25,14 @@ export class VitoriaComponent implements OnInit {
     this.backEndActive = this.servico.backEndActive
     this.servico.avisaQueOBackSubiu.subscribe(
       res => {this.backEndActive = res;
+        if(this.backEndActive){
+          this.servico.getAllHistorico().subscribe(
+            res => this.controlePartidas = res.length + 1
+          );
+        }
     })
 
-    if(this.backEndActive){
-      this.servico.getAllHistorico().subscribe(
-        res => this.controlePartidas = res.length + 1
-      );
-    }
+
 
   }
 
@@ -40,10 +41,10 @@ export class VitoriaComponent implements OnInit {
       let found = this.jogadores.find( element => element.nome == this.favoriteSeason )
 
       if(this.favoriteSeason == "") {
-        alert("Escolha um jogador")
+        return alert("Escolha um jogador")
       }
       if (found?.situacao == false) {
-        alert("Escolha um jogador ativo")
+        return alert("Escolha um jogador ativo")
       }
       else {
         this.servico.pushPartida(this.favoriteSeason, this.controlePartidas).subscribe(
@@ -52,6 +53,7 @@ export class VitoriaComponent implements OnInit {
             this.servico.addVencedorAlert(res)
             this.favoriteSeason = ""
             this.avisaVencedor.emit(res.vencedor)
+
           }
         )
       }
@@ -63,10 +65,10 @@ export class VitoriaComponent implements OnInit {
       let found = this.jogadores.find( element => element.nome == this.favoriteSeason )
 
       if(this.favoriteSeason == "") {
-        alert("Escolha um jogador")
+        return alert("Escolha um jogador")
       }
       if (found?.situacao == false) {
-        alert("Escolha um jogador ativo")
+        return alert("Escolha um jogador ativo")
       }
       else {
         this.servico.pushPartidaFront(this.favoriteSeason, this.controlePartidas)

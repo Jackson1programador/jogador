@@ -2,6 +2,8 @@ import { filter } from 'rxjs';
 import { servico } from './../../serviços/servico';
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Jogador } from 'src/app/Jogador';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-painel',
@@ -18,31 +20,47 @@ export class PainelComponent  implements OnInit {
   public pagador: string = "";
   backEndActive:Boolean = false;
 
-  constructor(private servico: servico) {}
+  constructor(
+    private servico: servico,
+    public dialog: MatDialog
+    ) {}
+
+
 
   ngOnInit(): void {
 
-    if (confirm('Subiu o servido backend? Se sim => clique em OK / Se não => clique em cancelar')) {
-        this.backEndActive = true
-        this.servico.InformaQueTemBackEnd()
+    this.openDialog('0ms', '0ms');
+    this.servico.avisaQueOBackSubiu.subscribe(
+      res => {this.backEndActive = res;
+        if(this.backEndActive){
+          this.servico.getAll().subscribe(
+            res => this.jogadores = res );
+        }
+        if(this.backEndActive){
+          this.servico.getAll().subscribe(
+            res => this.jogadores = res );
+        }
 
-    }
+        if(this.backEndActive){
+          this.servico.emitEvent.subscribe(
+            res => {
+              alert(`Jogador ${res.nome} cadastrado`);
+              this.jogadoresBack.push(res);
+              this.verificaBack()
+              this.jogadoresBack = [];
+            })
+          };
+    })
 
-    this.servico.backEndActive = this.backEndActive;
+    // if (confirm('Subiu o servido backend? Se sim => clique em OK / Se não => clique em cancelar')) {
+    //     this.backEndActive = true
+    //     this.servico.InformaQueTemBackEnd()
 
-    if(this.backEndActive){
-      this.servico.getAll().subscribe(
-        res => this.jogadores = res );
-    }
+    // }
 
-    if(this.backEndActive){
-      this.servico.emitEvent.subscribe(
-        res => {
-          alert(`Jogador ${res.nome} cadastrado`);
-          this.jogadoresBack.push(res);
-          this.verificaBack()
-        })
-      };
+
+
+
 
     if(!this.backEndActive){
       this.servico.emitEventFront.subscribe(
@@ -278,6 +296,14 @@ export class PainelComponent  implements OnInit {
 
   fechaContainerPagamento() {
     this.situacaoContainerPagamento = false
+  }
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(DialogComponent, {
+      width: '250px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
 

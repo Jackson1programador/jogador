@@ -1,5 +1,5 @@
 import { Partidas } from './../../partidas';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { servico } from './../../serviços/servico';
 
 @Component({
@@ -20,26 +20,26 @@ export class HistoricoComponent implements OnInit {
   constructor (private servico: servico) {}
 
   ngOnInit(): void {
-    this.backEndActive = this.servico.backEndActive
     this.servico.avisaQueOBackSubiu.subscribe(
       res => {this.backEndActive = res;
+        if(this.backEndActive){
+          this.servico.getAllHistorico().subscribe(
+            res => {
+              this.partidas = res
+            })
+        }
+
+        if(this.backEndActive){
+          this.servico.vencedorEmitEvent.subscribe(
+            res => {
+              alert(`Vencedor é ${res.vencedor}`)
+              return this.partidas.push(res);
+            }
+          )
+        }
     })
 
-    if(this.backEndActive){
-      this.servico.getAllHistorico().subscribe(
-        res => {
-          this.partidas = res
-        })
-    }
 
-    if(this.backEndActive){
-      this.servico.vencedorEmitEvent.subscribe(
-        res => {
-          alert(`Vencedor é ${res.vencedor}`)
-          return this.partidas.push(res);
-        }
-      )
-    }
 
     if(!this.backEndActive){
       this.servico.vencedorEmitEventFront.subscribe(
@@ -58,6 +58,7 @@ export class HistoricoComponent implements OnInit {
       )
     }
   }
+
 
   public excluiVencedor(index: number) {
     if(this.backEndActive){
