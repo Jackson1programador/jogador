@@ -1,19 +1,25 @@
 {
   "jogadores": [
     {
-      "nome": "teste",
+      "nome": "jack",
       "situacao": true,
-      "saldo": 0,
+      "saldo": 2.5,
       "imagem": "teste",
       "id": 1
     },
     {
-      "nome": "jack",
+      "nome": "brenna",
       "situacao": true,
-      "saldo": 0,
+      "saldo": -2.5,
       "imagem": "teste",
       "id": 2
     }
   ],
-  "partidas": []
+  "partidas": [
+    {
+      "vencedor": "jack",
+      "partida": 1,
+      "id": 1
+    }
+  ]
 }

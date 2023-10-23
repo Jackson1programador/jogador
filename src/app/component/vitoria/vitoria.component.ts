@@ -32,7 +32,9 @@ export class VitoriaComponent implements OnInit {
         }
     })
 
-
+    this.servico.deletaTudoEmit.subscribe(
+      res => {this.controlePartidas = 1}
+    )
 
   }
 
@@ -102,6 +104,5 @@ export class VitoriaComponent implements OnInit {
       this.repassandoAExclusaoFront.emit(nome);
     }
   }
-
 
 }
