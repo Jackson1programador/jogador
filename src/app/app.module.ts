@@ -21,6 +21,8 @@ import { RodapeComponent } from './component/rodape/rodape.component';
 import { PagamentoComponent } from './component/pagamento/pagamento.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from './component/dialog/dialog.component';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 
@@ -60,7 +62,8 @@ import { DialogComponent } from './component/dialog/dialog.component';
     MatRadioModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatInputModule
 
 
 

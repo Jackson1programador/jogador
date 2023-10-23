@@ -52,11 +52,19 @@ export class PainelComponent  implements OnInit {
           };
     })
 
-    // if (confirm('Subiu o servido backend? Se sim => clique em OK / Se não => clique em cancelar')) {
-    //     this.backEndActive = true
-    //     this.servico.InformaQueTemBackEnd()
+    this.servico.informaValor.subscribe(
+      res => {
+        this.valorDaPartida = res
+      }
+    )
 
-    // }
+    this.servico.deletaTudoEmit.subscribe(
+      res => {
+      this.jogadores = [];
+      this.jogadoresBack = [];
+      this.jogadoresFront = [];
+      }
+    )
 
 
 
@@ -304,6 +312,10 @@ export class PainelComponent  implements OnInit {
       enterAnimationDuration,
       exitAnimationDuration,
     });
+  }
+
+  deletaTudo(){
+
   }
 
 

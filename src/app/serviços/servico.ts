@@ -3,7 +3,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Jogador } from "../Jogador";
 import {HttpClient} from '@angular/common/http'
-import { filter, Observable } from "rxjs";
+import { elementAt, filter, Observable } from "rxjs";
 import { Partidas } from "../partidas";
 
 @Injectable({
@@ -20,11 +20,14 @@ export class servico {
   public vencedorEmitEvent = new EventEmitter();
   public apagandoVencedorEmitEvent = new EventEmitter();
   public avisaQueOBackSubiu = new EventEmitter();
+  public informaValor = new EventEmitter();
+  public deletaTudoEmit = new EventEmitter();
 
   public emitEventFront = new EventEmitter();
   public vencedorEmitEventFront = new EventEmitter();
   public vencedorEmitEventAlertFront = new EventEmitter();
   public apagandoVencedorEmitEventFront = new EventEmitter();
+
 
 
   constructor(private http: HttpClient) {}
@@ -87,6 +90,39 @@ export class servico {
   InformaQueTemBackEnd(){
     this.backEndActive = true;
     this.avisaQueOBackSubiu.emit(this.backEndActive)
+  }
+
+  InformaValor(valor: number){
+    this.informaValor.emit(valor)
+  }
+
+  deletaTudo(){
+
+    const confirmacao = confirm("Você tem certeza de que deseja excluir tudo?");
+
+    if (confirmacao) {
+          this.getAll().subscribe(
+            res => {
+              res.forEach((element) => {
+                this.deletaJogador(element.id).subscribe(
+                  res => res
+                )
+              });
+            }
+          )
+
+          this.getAllHistorico().subscribe(
+            res => {
+              res.forEach((element) => {
+                this.excluiVencedorBackEnd(element.id).subscribe(
+                  res => res
+                )
+              })
+            }
+          )
+
+          this.deletaTudoEmit.emit()
+    }
   }
 
   //lógica pro app funcionar sem back-end

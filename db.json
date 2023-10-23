@@ -1,14 +1,14 @@
 {
   "jogadores": [
     {
-      "nome": "Jackson",
+      "nome": "teste",
       "situacao": true,
       "saldo": 0,
       "imagem": "teste",
       "id": 1
     },
     {
-      "nome": "Brenna",
+      "nome": "jack",
       "situacao": true,
       "saldo": 0,
       "imagem": "teste",

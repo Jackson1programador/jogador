@@ -39,6 +39,12 @@ export class HistoricoComponent implements OnInit {
         }
     })
 
+    this.servico.deletaTudoEmit.subscribe(
+      res=> {
+        this.partidas = [];
+      }
+    )
+
 
 
     if(!this.backEndActive){
