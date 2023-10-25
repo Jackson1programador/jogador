@@ -3,14 +3,14 @@
     {
       "nome": "jack",
       "situacao": true,
-      "saldo": 2.5,
+      "saldo": 7.5,
       "imagem": "teste",
       "id": 1
     },
     {
       "nome": "brenna",
       "situacao": true,
-      "saldo": -2.5,
+      "saldo": -7.5,
       "imagem": "teste",
       "id": 2
     }
@@ -20,6 +20,16 @@
       "vencedor": "jack",
       "partida": 1,
       "id": 1
+    },
+    {
+      "vencedor": "jack",
+      "partida": 2,
+      "id": 2
+    },
+    {
+      "vencedor": "jack",
+      "partida": 3,
+      "id": 3
     }
   ]
 }

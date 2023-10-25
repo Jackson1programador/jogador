@@ -45,9 +45,12 @@
         </div>
 
         <div>
-          <button [disabled]="form.invalid" mat-raised-button color="primary" class="botao">Efetivar Pagamento</button>
+          <button [disabled]="form.invalid" mat-raised-button color="primary" class="botao">Pagar</button>
         </div>
 
+        <div class="divCancelar">
+          <button mat-raised-button color="warn" class="botao" id="cancelar" (click)="cancelarPagamento()">Cancelar</button>
+        </div>
 
 
       </footer>
@@ -55,9 +58,9 @@
 
     </form>
 
-    <div class="divCancelar">
+    <!-- <div class="divCancelar">
       <button mat-raised-button color="warn" class="botao" id="cancelar" (click)="cancelarPagamento()">Cancelar</button>
-    </div>
+    </div> -->
 
 
 

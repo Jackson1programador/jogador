@@ -13,7 +13,7 @@ export class ToolbarComponent {
   constructor(private servico : servico){
 
   }
-  value: any = 2.50;
+  value: any = "2,50";
 
   enviaValorParaServico(){
     var valor = this.value.replace(",", ".")
